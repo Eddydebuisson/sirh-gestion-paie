@@ -30,7 +30,7 @@ public void test_sauvegarder_lister_mettre_a_jour() {
 		cotisationService.sauvegarder(cotiSave);
 	assertThat(cotisationService.lister().contains(cotiSave));
 
-	cotisationService.mettreAJour(cotiModif);
-	assertThat(cotisationService.lister().contains(cotiModif));
+		cotisationService.mettreAJour(cotiModif);
+		assertThat(cotisationService.lister().contains(cotiModif));
 }
 }
