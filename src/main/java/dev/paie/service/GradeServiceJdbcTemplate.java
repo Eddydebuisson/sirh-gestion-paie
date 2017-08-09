@@ -40,12 +40,12 @@ this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	public void create(Grade p) {
-		String sql = "INSERT INTO grade (id,code,nb_heure_bases,taux_bases) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO grade (id,code,nbHeuresBase,tauxBase) VALUES(?,?,?,?)";
 		this.jdbcTemplate.update(sql, p.getId(), p.getCode(), p.getNbHeuresBase(), p.getTauxBase());
 	}
 
 	public void update(Grade p) {
-		String sql = "UPDATE grade SET code = ?,nb_heure_bases = ? ,taux_bases= ? WHERE ID = ? ";
+		String sql = "UPDATE grade SET code = ?,nbHeuresBase = ? ,tauxBase= ? WHERE ID = ? ";
 		this.jdbcTemplate.update(sql, p.getCode(), p.getNbHeuresBase(), p.getTauxBase(), p.getId());
 	}
 
@@ -61,8 +61,8 @@ this.jdbcTemplate = new JdbcTemplate(dataSource);
 			Grade p = new Grade();
 			p.setId(rs.getInt("id"));
 			p.setCode(rs.getString("code"));
-			p.setNbHeuresBase(rs.getBigDecimal("nb_heure_bases"));
-			p.setTauxBase(rs.getBigDecimal("taux_bases"));
+			p.setNbHeuresBase(rs.getBigDecimal("nbHeuresBase"));
+			p.setTauxBase(rs.getBigDecimal("tauxBase"));
 			return p;
 		}
 	}

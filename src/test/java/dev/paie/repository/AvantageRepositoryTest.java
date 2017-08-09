@@ -32,7 +32,12 @@ public void test_sauvegarder_lister_mettre_a_jour() {
 		avantageRepository.save(avantageSave);
 		assertThat(avantageRepository.findAll().contains(avantageSave));
 
-		avantageRepository.saveAndFlush(avantageModif);
+		Avantage avantagetrouver = avantageRepository.findOne(1);
+		avantagetrouver.setCode(avantageModif.getCode());
+		avantagetrouver.setNom(avantageModif.getNom());
+		avantagetrouver.setMontant(avantageModif.getMontant());
+		avantageRepository.save(avantagetrouver);
+
 		assertThat(avantageRepository.findAll().contains(avantageModif));
 }
 
