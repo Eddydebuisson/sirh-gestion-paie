@@ -16,7 +16,7 @@
 		<li role="presentation"><a href="/paie/bulletins">Bulletins</a></li>
 	</ul>
 
-<form class="form-horizontal">
+<form:form method="post" modelAttribute="employe" class="form-horizontal">
 		<fieldset>
 
 			<!-- Text input-->
@@ -73,6 +73,6 @@
 			</div>
 
 		</fieldset>
-	</form>
+	</form:form>
 </body>
 </html>

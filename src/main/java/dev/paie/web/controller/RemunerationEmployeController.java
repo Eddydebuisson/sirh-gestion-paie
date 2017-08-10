@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,11 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
 import dev.paie.entite.ProfilRemuneration;
-import dev.paie.repository.CotisationRepository;
+import dev.paie.entite.RemunerationEmploye;
 import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
-import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilsRemunerationRepository;
+import dev.paie.repository.RenumerationEmployeRepository;
 
 @Controller
 @RequestMapping("/employes")
@@ -31,10 +32,7 @@ public class RemunerationEmployeController {
 	private ProfilsRemunerationRepository renumerationRepository;
 
 	@Autowired
-	private CotisationRepository cotiRepository;
-
-	@Autowired
-	private PeriodeRepository periodeRepository;
+	private RenumerationEmployeRepository employeRepository;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
 	public ModelAndView creerEmploye() {
@@ -52,4 +50,13 @@ public class RemunerationEmployeController {
 
 		return mv;
 	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public String FormCreerEmploye(@ModelAttribute("employe") RemunerationEmploye employe) {
+
+		employeRepository.save(employe);
+		
+		return "formEmploye";
+	}
+
 }
