@@ -1,5 +1,6 @@
 package dev.paie.web.controller;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
 import dev.paie.repository.ProfilsRemunerationRepository;
 import dev.paie.repository.RenumerationEmployeRepository;
+import dev.paie.web.controller.form.EmployeForm;
 
 @Controller
 @RequestMapping("/employes")
@@ -34,6 +36,7 @@ public class RemunerationEmployeController {
 
 	@Autowired
 	private RenumerationEmployeRepository employeRepository;
+	
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
 	@Secured("ROLE_ADMINISTRATEUR")
@@ -53,13 +56,31 @@ public class RemunerationEmployeController {
 		return mv;
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	@Secured("ROLE_ADMINISTRATEUR")
-	public String FormCreerEmploye(@ModelAttribute("employe") RemunerationEmploye employe) {
+	@RequestMapping(method = RequestMethod.GET, path = "/lister")
+	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
+	public ModelAndView afficherEmploye() {
+		ModelAndView mv = new ModelAndView();
 
-		employeRepository.save(employe);
+		List<RemunerationEmploye> profils = employeRepository.findAll();
+		mv.addObject("listeEmploye", profils);
+
+		return mv;
+
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
+	public String FormCreerEmploye(@ModelAttribute("employe") EmployeForm employe) {
+		RemunerationEmploye nouveau = new RemunerationEmploye();
+		ZonedDateTime date = ZonedDateTime.now();
+		nouveau.setMatricule(employe.getMatricule());
+		nouveau.setEntreprise(entrepriseRepository.findByDenomination(employe.getEntreprise()));
+		nouveau.setGrade(gradeRepository.findByCode(employe.getGrade()));
+		nouveau.setProfilRemuneration(renumerationRepository.findByCode(employe.getProfil()));
+		nouveau.setDatecreation(date);
+		employeRepository.save(nouveau);
 		
-		return "formEmploye";
+		return "redirect:lister";
 	}
 
 }

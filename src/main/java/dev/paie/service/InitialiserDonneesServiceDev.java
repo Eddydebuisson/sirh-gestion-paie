@@ -85,8 +85,10 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		String adminpass = this.passwordEncoder.encode("admin");
 		Utilisateur admin = new Utilisateur("admin", adminpass, true,
 				Utilisateur.ROLES.ROLE_ADMINISTRATEUR);
-		
+		Utilisateur rossi = new Utilisateur("SuperRossi", this.passwordEncoder.encode("ILOVEJAVA"), true,
+				Utilisateur.ROLES.ROLE_UTILISATEUR);
 		utilisateurRepository.save(admin);
+		utilisateurRepository.save(rossi);
 
 	}
 

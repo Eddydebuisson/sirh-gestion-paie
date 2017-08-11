@@ -24,32 +24,20 @@
 
 			<!-- Text input-->
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="matricule">Matricule</label>
+				<label class="col-md-4 control-label" for="prime">Prime Exceptionnel</label>
 				<div class="col-md-4">
-					<input id="matricule" name="matricule" placeholder=""
+					<input id="prime" name="prime" placeholder=""
 						class="form-control input-md" required type="text">
 				</div>
 			</div>
 
 			<!-- Select Basic -->
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="selectbasic">Entreprise</label>
+				<label class="col-md-4 control-label" for="selectbasic">periode</label>
 				<div class="col-md-4">
-					<select id="selectbasic" name="entreprise" class="form-control">
-						<c:forEach var="entreprise" items="${entreprise}">
-							<option value="${entreprise.denomination}">${entreprise.denomination}</option>
-						</c:forEach>
-					</select>
-				</div>
-			</div>
-
-			<!-- Select Basic -->
-			<div class="form-group">
-				<label class="col-md-4 control-label" for="profil">Profil</label>
-				<div class="col-md-4">
-					<select id="profil" name="profil" class="form-control">
-						<c:forEach var="profil" items="${profil}">
-							<option value="${profil.code}">${profil.code}</option>
+					<select id="selectbasic" name="periode" class="form-control">
+						<c:forEach var="entreprise" items="${periode}">
+							<option value="${periode.dateDebut} ${periode.dateFin}">${periode.dateDebut} ${periode.dateFin}</option>
 						</c:forEach>
 					</select>
 				</div>

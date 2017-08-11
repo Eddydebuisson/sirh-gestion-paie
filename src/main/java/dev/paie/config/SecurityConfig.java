@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers("/bootsrap-3.3.7-dist/**").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/mvc/connexion").permitAll();
+				
 	}
 
 
