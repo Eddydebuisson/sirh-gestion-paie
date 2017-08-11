@@ -14,6 +14,13 @@
 	</properties>
 
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<finalName>paie</finalName>
 		<pluginManagement>
 			<plugins>
@@ -28,19 +35,26 @@
 	</build>
 
 	<dependencies>
-	
-	<!--TEST-->
-	
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version> <!-- Peut-être une autre version -->
+			<scope>runtime</scope>
+		</dependency>
+
+		<!--TEST -->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 		</dependency>
 		<dependency>
-				<groupId>org.assertj</groupId>
-				<artifactId>assertj-core</artifactId>
-				<version>3.8.0</version>
-				<scope>test</scope>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.8.0</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- Framework -->
 		<dependency>
@@ -56,7 +70,7 @@
 			<artifactId>spring-jdbc</artifactId>
 			<scope>compile</scope>
 		</dependency>
-<!-- exemple de connecteur jdbc -->
+		<!-- exemple de connecteur jdbc -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -67,13 +81,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 		</dependency>
-<!-- API JPA -->
+		<!-- API JPA -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>
-<!-- Implémentation JPA -->
+		<!-- Implémentation JPA -->
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
@@ -85,37 +99,37 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
-    		<groupId>org.hibernate</groupId>
-    		<artifactId>hibernate-core</artifactId>
-    		<version>5.2.10.Final</version>
-    		<scope>runtime</scope>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.10.Final</version>
+			<scope>runtime</scope>
 		</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>javax.servlet-api</artifactId>
-				<version>3.1.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>jstl</groupId>
-				<artifactId>jstl</artifactId>
-				<version>1.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-web</artifactId>
-				<version>4.2.2.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-config</artifactId>
-				<version>4.2.2.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-taglibs</artifactId>
-				<version>4.2.2.RELEASE</version>
-			</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -129,5 +143,31 @@
 
 		</dependencies>
 	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<maven.driver>com.mysql.jdbc.Driver</maven.driver>
+				<maven.url>jdbc:mysql://localhost:3306/sirh-paie?useSSL=false</maven.url>
+				<maven.username>root</maven.username>
+				<maven.password></maven.password>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<maven.driver>org.h2.Driver</maven.driver>
+				<maven.url>jdbc:h2:mem:sirh-paie-test;DB_CLOSE_DELAY=-1</maven.url>
+				<maven.username>sa</maven.username>
+				<maven.password></maven.password>
+			</properties>
+		</profile>
+	</profiles>
+
+
 </project>
 

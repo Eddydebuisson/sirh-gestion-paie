@@ -2,19 +2,23 @@ package dev.paie.spring;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
+@PropertySource("classpath:app.properties")
 public class DataSourceMySQLConfig {
 	@Bean
-	public DataSource dataSource() {
+	public DataSource dataSource(@Value("${driver}") String driver, @Value("${url}") String url,
+			@Value("${userdbname}") String username, @Value("${password}") String password) {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/sirh-paie?useSSL=false");
-		dataSource.setUsername("root");
-		dataSource.setPassword("");
+		dataSource.setDriverClassName(driver);
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 		return dataSource;
 	}
 }
