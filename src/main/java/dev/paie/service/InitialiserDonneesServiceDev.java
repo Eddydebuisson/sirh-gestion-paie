@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import dev.paie.entite.Cotisation;
@@ -16,11 +17,13 @@ import dev.paie.entite.Entreprise;
 import dev.paie.entite.Grade;
 import dev.paie.entite.Periode;
 import dev.paie.entite.ProfilRemuneration;
+import dev.paie.entite.Utilisateur;
 import dev.paie.repository.CotisationRepository;
 import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.ProfilsRemunerationRepository;
+import dev.paie.repository.UtilisateurRepository;
 
 @Service
 public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
@@ -42,6 +45,12 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 
 	@Autowired
 	private PeriodeRepository periodeRepository;
+
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public void initialiser() {
@@ -72,6 +81,12 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 		}
 		
 		list.forEach(a -> periodeRepository.save(a));
+		
+		String adminpass = this.passwordEncoder.encode("admin");
+		Utilisateur admin = new Utilisateur("admin", adminpass, true,
+				Utilisateur.ROLES.ROLE_ADMINISTRATEUR);
+		
+		utilisateurRepository.save(admin);
 
 	}
 
