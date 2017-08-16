@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/bootsrap-3.3.7-dist/**").permitAll().anyRequest().authenticated().and()
+		http.authorizeRequests().antMatchers("/bootstrap-3.3.7-dist/**").permitAll().anyRequest().authenticated().and()
 				.formLogin().loginPage("/mvc/connexion").permitAll();
 				
 	}
