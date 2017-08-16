@@ -14,12 +14,14 @@
 <body>
 
 	<ul class="nav nav-pills">
-		<li role="presentation"><a href="/paie">Accueil</a></li>
+		<li role="presentation"><a href="/paie">Accueil</a></li>		
+		<li role="presentation"><a href="/paie/mvc/employes/creer">Creer Employés</a></li>
+		<li role="presentation"><a href="/paie/mvc/bulletin/creer">Creer Bulletins</a></li>
 		<li role="presentation"><a href="/paie/mvc/employes/lister">Employés</a></li>
-		<li role="presentation"><a href="/paie/mvc/construction">Bulletins</a></li>
+		<li role="presentation"><a href="/paie/mvc/bulletin/lister">Bulletins</a></li>
 	</ul>
 
-<form:form method="post" modelAttribute="employe" class="form-horizontal">
+<form:form method="post" modelAttribute="bulletin" class="form-horizontal">
 		<fieldset>
 
 			<!-- Text input-->
@@ -36,8 +38,8 @@
 				<label class="col-md-4 control-label" for="selectbasic">periode</label>
 				<div class="col-md-4">
 					<select id="selectbasic" name="periode" class="form-control">
-						<c:forEach var="entreprise" items="${periode}">
-							<option value="${periode.dateDebut} ${periode.dateFin}">${periode.dateDebut} ${periode.dateFin}</option>
+						<c:forEach var="periode" items="${periode}">
+							<option value="${periode.id}">${periode.dateDebut} ${periode.dateFin}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -45,11 +47,11 @@
 
 			<!-- Select Basic -->
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="grade">Grade</label>
+				<label class="col-md-4 control-label" for="matricule">Matricule</label>
 				<div class="col-md-4">
-					<select id="grade" name="grade" class="form-control">
-						<c:forEach var="grade" items="${grade}">
-							<option value="${grade.code}">${grade.code}</option>
+					<select id="matricule" name="matricule" class="form-control">
+						<c:forEach var="matricule" items="${matricule}">
+							<option value="${matricule.id}">${matricule.matricule}</option>
 						</c:forEach>
 					</select>
 				</div>

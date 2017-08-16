@@ -14,9 +14,11 @@
 <body>
 
 	<ul class="nav nav-pills">
-		<li role="presentation"><a href="/paie">Accueil</a></li>
+		<li role="presentation"><a href="/paie">Accueil</a></li>		
+		<li role="presentation"><a href="/paie/mvc/employes/creer">Creer Employés</a></li>
+		<li role="presentation"><a href="/paie/mvc/bulletin/creer">Creer Bulletins</a></li>
 		<li role="presentation"><a href="/paie/mvc/employes/lister">Employés</a></li>
-		<li role="presentation"><a href="/paie/mvc/construction">Bulletins</a></li>
+		<li role="presentation"><a href="/paie/mvc/bulletin/lister">Bulletins</a></li>
 	</ul>
 
 <form:form method="post" modelAttribute="employe" class="form-horizontal">

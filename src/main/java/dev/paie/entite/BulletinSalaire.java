@@ -1,6 +1,7 @@
 package dev.paie.entite;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,9 +23,17 @@ public class BulletinSalaire {
 	@ManyToOne
 	@JoinColumn(name = "periode")
 	private Periode periode;
+	private ZonedDateTime dateCreation;
 
 	private BigDecimal primeExceptionnelle;
 	
+	public ZonedDateTime getDateCreation() {
+		return dateCreation;
+	}
+
+	public void setDateCreation(ZonedDateTime dateCreation) {
+		this.dateCreation = dateCreation;
+	}
 	public RemunerationEmploye getRemunerationEmploye() {
 		return remunerationEmploye;
 	}
